@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>TESA Command — Overview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <h1>🛰️ TESA Command • Overview</h1>
+      <a class="btn" href="/monitor">📟 Live Monitor</a>
+    </div>
+
+    <div class="card">
+      <div class="diag" id="diag">Diagnostics: loading…</div>
+      <div class="hr"></div>
+      <div class="legend">
+        <span class="dot def"></span> Defence
+        <span class="dot off" style="margin-left:12px"></span> Offence
+      </div>
+    </div>
+
+    <div style="height:12px"></div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="section-title">
+          <h2>🛡️ Defence (Realtime)</h2>
+          <span id="def-socket" class="pill disconnected">Disconnected</span>
+        </div>
+        <div class="smallgrid">
+          <div class="kpi"><h4>Objects</h4><div class="v" id="def-objects">--</div></div>
+          <div class="kpi"><h4>Last Update</h4><div class="v" id="def-time">--</div></div>
+          <div class="kpi"><h4>Lat</h4><div class="v" id="def-lat">--</div></div>
+          <div class="kpi"><h4>Lng</h4><div class="v" id="def-lng">--</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">
+          <h2>🗡️ Offence (Realtime)</h2>
+          <span id="off-socket" class="pill disconnected">Disconnected</span>
+        </div>
+        <div class="smallgrid">
+          <div class="kpi"><h4>Objects</h4><div class="v" id="off-objects">--</div></div>
+          <div class="kpi"><h4>Last Update</h4><div class="v" id="off-time">--</div></div>
+          <div class="kpi"><h4>Lat</h4><div class="v" id="off-lat">--</div></div>
+          <div class="kpi"><h4>Lng</h4><div class="v" id="off-lng">--</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:12px"></div>
+
+    <div class="card">
+      <div class="section-title">
+        <h2>🧩 Host Telemetry</h2>
+        <span class="pill connected">Polling</span>
+      </div>
+      <div class="smallgrid">
+        <div class="kpi"><h4>CPU Temp (°C)</h4><div class="v" id="host-temp">N/A</div></div>
+        <div class="kpi"><h4>Uptime</h4><div class="v" id="host-uptime">--</div></div> <div class="kpi"><h4>Local Time</h4><div class="v" id="host-time">--</div></div>
+        <div class="kpi"><h4>Weather / Status</h4><div class="v" id="host-status">Operational / Clear</div></div> <div class="kpi"><h4>Socket URL</h4><div class="v" id="host-sock">--</div></div>
+        <div class="kpi"><h4>API Base</h4><div class="v" id="host-api">--</div></div>
+        <div class="kpi"><h4>Def Camera Name</h4><div class="v" id="host-def-name">--</div></div> <div class="kpi"><h4>Off Camera Name</h4><div class="v" id="host-off-name">--</div></div> </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script>window.addEventListener('DOMContentLoaded', App.initOverview);</script>
+</body>
+</html>
