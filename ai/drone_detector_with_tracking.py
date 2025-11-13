@@ -556,9 +556,13 @@ class DroneDetectorWithTracking:
     """
     
     def __init__(self, model_path, device='auto', conf_threshold=0.5, tracker_type='advanced',
-                 max_age=120, min_hits=1, iou_threshold=0.15, distance_threshold=200):
+                 max_age=120, min_hits=1, iou_threshold=0.15, distance_threshold=200,
+                 adaptive_confidence=True, small_object_area_ratio=0.0125, low_confidence_delta=0.2):
         self.model_path = model_path
         self.conf_threshold = conf_threshold
+        self.adaptive_confidence = adaptive_confidence
+        self.small_object_area_ratio = small_object_area_ratio
+        self.low_conf_threshold = max(conf_threshold - low_confidence_delta, 0.05)
         
         # Tracker parameters
         self.max_age = max_age
@@ -793,7 +797,22 @@ class DroneDetectorWithTracking:
                     
                     # Filter by confidence
                     if len(predictions) > 0:
-                        predictions = predictions[predictions['confidence'] >= self.conf_threshold]
+                        if self.adaptive_confidence:
+                            frame_area = frame.shape[0] * frame.shape[1]
+                            widths = predictions['xmax'] - predictions['xmin']
+                            heights = predictions['ymax'] - predictions['ymin']
+                            areas = widths * heights
+                            area_ratio = areas / max(frame_area, 1)
+                            
+                            high_conf_mask = predictions['confidence'] >= self.conf_threshold
+                            small_object_mask = (
+                                (area_ratio <= self.small_object_area_ratio) &
+                                (predictions['confidence'] >= self.low_conf_threshold)
+                            )
+                            adaptive_mask = high_conf_mask | small_object_mask
+                            predictions = predictions[adaptive_mask]
+                        else:
+                            predictions = predictions[predictions['confidence'] >= self.conf_threshold]
                         detections = predictions[['xmin', 'ymin', 'xmax', 'ymax', 'confidence']].values
                     else:
                         detections = np.empty((0, 5))
@@ -1033,7 +1052,7 @@ def main():
             video_path=VIDEO_PATH,
             output_path=OUTPUT_PATH,
             show_window=True,  # Set False for headless processing
-            skip_frames=1  # Process every frame (increase for speed)
+            skip_frames=3  # Process every 3rd frame for better accuracy/speed trade-off
         )
         
         print("\n✓ Done!")
