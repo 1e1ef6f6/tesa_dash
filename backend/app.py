@@ -16,8 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
 
 APP = Flask(
-    __name__, static_folder="../frontend", static_url_path="/"
-)  # แก้ static_folder ให้ชี้ไปที่ /frontend
+    __name__, static_folder="../frontend")  # แก้ static_folder ให้ชี้ไปที่ /frontend
 CORS(APP, resources={r"/*": {"origins": "*"}})  # เปิด CORS
 
 # ---------- ENV ----------

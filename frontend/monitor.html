@@ -1,61 +1,73 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>TESA Command — Monitor</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="/css/style.css"/>
-  <link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet" />
-  <script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
-</head>
-<body>
-  <div class="container">
-    <div class="topbar">
-      <h1>📟 Live Monitor</h1>
-      <a class="btn" href="/">← Overview</a>
-    </div>
-
-    <div class="card"><div class="diag" id="diag">Socket: … | Defence API: … | Offence API: …</div></div>
-    <div style="height:12px"></div>
-
-    <div class="grid2">
-      <div class="card panel-col" id="def-panel">
-        <div class="section-title">
-          <h2>🛡️ Defence</h2>
-          <span id="def-badge" class="pill disconnected">Disconnected</span>
-        </div>
-
-        <div class="monitor-grid">
-          <div class="map-wrap">
-            <div id="def-map"></div>
-            <div id="def-pip" class="pip" title="Click to expand/collapse"><div class="empty">No Image</div></div>
-          </div>
-          <div class="cam-wrap" id="def-cam-slot" style="display:none"></div>
-          <div class="tools"><div class="zoom-note">Map zoom control at bottom-right • Click camera preview to expand/collapse</div></div>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <title>TESA Command — Monitor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css"
+      rel="stylesheet" />
+    <script
+      src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <h1>📟 Live Monitor</h1>
+        <a class="btn" href="/overview">← Overview</a>
       </div>
 
-      <div class="card panel-col" id="off-panel">
-        <div class="section-title">
-          <h2>🗡️ Offence</h2>
-          <span id="off-badge" class="pill disconnected">Disconnected</span>
+      <div class="card"><div class="diag" id="diag">Socket: … | Defence API: … |
+          Offence API: …</div></div>
+      <div style="height:12px"></div>
+
+      <div class="grid2">
+        <div class="card panel-col" id="def-panel">
+          <div class="section-title">
+            <h2>🛡️ Defence</h2>
+            <span id="def-badge" class="pill disconnected">Disconnected</span>
+          </div>
+
+          <div class="monitor-grid">
+            <div class="map-wrap">
+              <div id="def-map"></div>
+              <div id="def-pip" class="pip"
+                title="Click to expand/collapse"><div class="empty">No
+                  Image</div></div>
+            </div>
+            <div class="cam-wrap" id="def-cam-slot" style="display:none"></div>
+            <div class="tools"><div class="zoom-note">Map zoom control at
+                bottom-right • Click camera preview to
+                expand/collapse</div></div>
+          </div>
         </div>
 
-        <div class="monitor-grid">
-          <div class="map-wrap">
-            <div id="off-map"></div>
-            <div id="off-pip" class="pip" title="Click to expand/collapse"><div class="empty">No Image</div></div>
+        <div class="card panel-col" id="off-panel">
+          <div class="section-title">
+            <h2>🗡️ Offence</h2>
+            <span id="off-badge" class="pill disconnected">Disconnected</span>
           </div>
-          <div class="cam-wrap" id="off-cam-slot" style="display:none"></div>
-          <div class="tools"><div class="zoom-note">Map zoom control at bottom-right • Click camera preview to expand/collapse</div></div>
+
+          <div class="monitor-grid">
+            <div class="map-wrap">
+              <div id="off-map"></div>
+              <div id="off-pip" class="pip"
+                title="Click to expand/collapse"><div class="empty">No
+                  Image</div></div>
+            </div>
+            <div class="cam-wrap" id="off-cam-slot" style="display:none"></div>
+            <div class="tools"><div class="zoom-note">Map zoom control at
+                bottom-right • Click camera preview to
+                expand/collapse</div></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
-  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-  <script src="/js/app.js"></script>
-  <script>window.addEventListener('DOMContentLoaded', App.initMonitor);</script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script>window.addEventListener('DOMContentLoaded', App.initMonitor);</script>
+  </body>
 </html>
